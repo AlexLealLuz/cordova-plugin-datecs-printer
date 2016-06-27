@@ -40,6 +40,7 @@ import android.graphics.BitmapFactory;
 import com.datecs.api.BuildInfo;
 import com.datecs.api.printer.PrinterInformation;
 import com.datecs.api.printer.Printer;
+import com.datecs.api.printer.Printer.ConnectionListener;
 import com.datecs.api.printer.ProtocolAdapter;
 
 public class DatecsSDKWrapper {
@@ -58,8 +59,8 @@ public class DatecsSDKWrapper {
     /**
      * Interface de eventos da Impressora
      */
-    private final ProtocolAdapter.PrinterListener mChannelListener = new ProtocolAdapter.PrinterListener() {
-        @Override
+    private final ProtocolAdapter.PrinterListener mPrinterListener = new ProtocolAdapter.PrinterListener() {
+        @OverridemPrinterListener
         public void onPaperStateChanged(boolean hasPaper) {
             if (hasPaper) {
                 showToast("Papel ok");
@@ -215,11 +216,11 @@ public class DatecsSDKWrapper {
      */
     private synchronized void closePrinterConnection() {
         if (mPrinter != null) {
-            mPrinter.release();
+            mPrinter.close();
         }
 
         if (mProtocolAdapter != null) {
-            mProtocolAdapter.release();
+            mProtocolAdapter.close();
         }
     }
 
@@ -315,33 +316,13 @@ public class DatecsSDKWrapper {
         mProtocolAdapter = new ProtocolAdapter(inputStream, outputStream);
         if (mProtocolAdapter.isProtocolEnabled()) {
             final ProtocolAdapter.Channel channel = mProtocolAdapter.getChannel(ProtocolAdapter.CHANNEL_PRINTER);
-            channel.setListener(mChannelListener);
-            // Create new event pulling thread
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (true) {
-                        try {
-                            Thread.sleep(50);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                        try {
-                            channel.pullEvent();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            sendStatusUpdate(false);
-                            showError(e.getMessage(), mRestart);
-                            break;
-                        }
-                    }
-                }
-            }).start();
+            mProtocolAdapter.setPrinterListener(mPrinterListener);
+            
             mPrinter = new Printer(channel.getInputStream(), channel.getOutputStream());
         } else {
             mPrinter = new Printer(mProtocolAdapter.getRawInputStream(), mProtocolAdapter.getRawOutputStream());
         }
+        
         callbackContext.success();
     }
 
