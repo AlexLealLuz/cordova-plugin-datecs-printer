@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-datecs-printer-qr",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Cordova Datecs Printer Plugin QR Code",
   "cordova": {
     "id": "cordova-plugin-datecs-printer-qr",
