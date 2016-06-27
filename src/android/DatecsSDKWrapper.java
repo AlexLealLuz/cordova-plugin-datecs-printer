@@ -58,25 +58,10 @@ public class DatecsSDKWrapper {
     /**
      * Interface de eventos da Impressora
      */
-    private final ProtocolAdapter.ChannelListener mChannelListener = new ProtocolAdapter.ChannelListener() {
+    private final ProtocolAdapter.PrinterListener mChannelListener = new ProtocolAdapter.PrinterListener() {
         @Override
-        public void onReadEncryptedCard() {
-            // TODO: onReadEncryptedCard
-        }
-
-        @Override
-        public void onReadCard() {
-            // TODO: onReadCard
-        }
-
-        @Override
-        public void onReadBarcode() {
-            // TODO: onReadBarcode
-        }
-
-        @Override
-        public void onPaperReady(boolean state) {
-            if (state) {
+        public void onPaperStateChanged(boolean hasPaper) {
+            if (hasPaper) {
                 showToast("Papel ok");
             } else {
                 closeActiveConnections();
@@ -85,15 +70,15 @@ public class DatecsSDKWrapper {
         }
 
         @Override
-        public void onOverHeated(boolean state) {
-            if (state) {
+        public void onThermalHeadStateChanged(boolean overheated) {
+            if (overheated) {
                 showToast("Superaquecimento");
             }
         }
 
         @Override
-        public void onLowBattery(boolean state) {
-            if (state) {
+        public void onBatteryStateChanged(boolean lowBattery) {
+            if (lowBattery) {
                 showToast("Pouca bateria");
             }
         }
