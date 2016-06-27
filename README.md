@@ -80,6 +80,21 @@ function printMyBarcode() {
     }
   );
 }
+
+function printMyQRCode() {
+  window.DatecsPrinter.setBarcode(1, false, 2, 0, 100);
+  window.DatecsPrinter.printQRCode(
+    4, // qr code size
+    2, // qr code error correction
+    'http://www.datecs.bg', // barcode data
+    function() {
+      alert('success!');
+    },
+    function() {
+      alert(JSON.stringify(error));
+    }
+  );
+}
 ```
 
 ### Tags definition
