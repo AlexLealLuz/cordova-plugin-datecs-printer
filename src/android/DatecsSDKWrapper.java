@@ -60,7 +60,7 @@ public class DatecsSDKWrapper {
      * Interface de eventos da Impressora
      */
     private final ProtocolAdapter.PrinterListener mPrinterListener = new ProtocolAdapter.PrinterListener() {
-        @OverridemPrinterListener
+        @Override
         public void onPaperStateChanged(boolean hasPaper) {
             if (hasPaper) {
                 showToast("Papel ok");
