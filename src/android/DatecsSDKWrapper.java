@@ -117,6 +117,7 @@ public class DatecsSDKWrapper {
         put(15, "Erro ao imprimir retângulo");
         put(16, "Erro ao imprimir retângulo");
         put(17, "Erro ao imprimir retângulo");
+        put(18, "Erro ao imprimir QR code");
     }};
 
     private JSONObject getErrorByCode(int code) {
@@ -448,6 +449,23 @@ public class DatecsSDKWrapper {
             mCallbackContext.success();
         } catch (Exception e) {
             mCallbackContext.error(this.getErrorByCode(8, e));
+        }
+    }
+    
+    /**
+     * Print a QR Code
+     *
+     * @param size: 1, 4, 6, 8, 10, 12, 14
+     * @param eccLv - 1: L (7%), 2: M (15%), 3: Q (25%), 4: H (30%)
+     * @param data - data to generate qr code
+     */
+    public void printQRCode(int size, int eccLvl, String data) {
+        try {
+            mPrinter.printQRCode(size, eccLvl, data);
+            mPrinter.flush();
+            mCallbackContext.success();
+        } catch (Exception e) {
+            mCallbackContext.error(this.getErrorByCode(18, e));
         }
     }
 
