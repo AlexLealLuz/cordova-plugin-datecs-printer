@@ -1,16 +1,16 @@
 {
-  "name": "cordova-plugin-datecs-printer",
-  "version": "0.3.7",
-  "description": "Cordova Datecs Printer Plugin",
+  "name": "cordova-plugin-datecs-printer-qr",
+  "version": "0.4.0",
+  "description": "Cordova Datecs Printer Plugin QR Code",
   "cordova": {
-    "id": "cordova-plugin-datecs-printer",
+    "id": "cordova-plugin-datecs-printer-qr",
     "platforms": [
       "android"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/giorgiofellipe/cordova-plugin-datecs-printer"
+    "url": "https://github.com/gustavocampos/cordova-plugin-datecs-printer"
   },
   "keywords": [
     "cordova",
