@@ -14,6 +14,7 @@ public class DatecsPrinter extends CordovaPlugin {
 		listBluetoothDevices,
 				connect,
 				disconnect,
+				flush,
 				feedPaper,
 				printText,
 				getStatus,
