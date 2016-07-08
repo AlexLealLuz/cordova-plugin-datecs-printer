@@ -149,7 +149,7 @@ public class DatecsSDKWrapper {
                     map.put("type", device.getType());
                     map.put("address", device.getAddress());
                     map.put("name", device.getName());
-                    map.put("btClass", device.getBluetoothClass().getDeviceClass())
+                    map.put("btClass", device.getBluetoothClass().getDeviceClass());
                     
                     ParcelUuid[] parcels = device.getUuids();
                     if (parcels != null && parcels.length > 0) {
