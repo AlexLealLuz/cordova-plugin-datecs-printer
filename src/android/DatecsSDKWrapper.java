@@ -444,6 +444,15 @@ public class DatecsSDKWrapper {
             mCallbackContext.error(this.getErrorByCode(18, e));
         }
     }
+    
+    public void flush() {
+        try {
+            mPrinter.flush();
+            mCallbackContext.success();
+        } catch (Exception e) {
+            mCallbackContext.error(this.getErrorByCode(18, e));
+        }
+    }
 
     /**
      * Print a selftest page
