@@ -143,6 +143,9 @@ public class DatecsPrinter extends CordovaPlugin {
 			case printPage:
 			  printer.printPage();
 			  break;
+			case flush:
+			  printer.flush();
+			  break;
 		}
 		return true;
 	}
