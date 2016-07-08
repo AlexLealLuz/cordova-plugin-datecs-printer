@@ -29,6 +29,7 @@ import android.util.Log;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -150,6 +151,16 @@ public class DatecsSDKWrapper {
                     map.put("type", device.getType());
                     map.put("address", device.getAddress());
                     map.put("name", device.getName());
+                    
+                    ParcelUuid[] parcels = device.getUuids();
+                    if (parcels != null && parcels.length > 0) {
+                        String[] uuids = new String[parcels.length];
+                        for (int i = 0; i < parcels.length; i++) {
+                            uuids[i] = parcels[i].getUuid().toString();
+                        }
+                        map.put("uuids", uuids);
+                    }
+                    
                     JSONObject jObj = new JSONObject(map);
                     json.put(jObj);
                 }
