@@ -22,6 +22,9 @@ var printer = {
   disconnect: function(onSuccess, onError) {
     exec(onSuccess, onError, 'DatecsPrinter', 'disconnect', []);
   },
+  flush: function(onSuccess, onError) {
+    exec(onSuccess, onError, 'DatecsPrinter', 'flush', []);
+  },
   feedPaper: function(lines, onSuccess, onError) {
     exec(onSuccess, onError, 'DatecsPrinter', 'feedPaper', [lines]);
   },
