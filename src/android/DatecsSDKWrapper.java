@@ -347,7 +347,7 @@ public class DatecsSDKWrapper {
         }
         try {
             mPrinter.feedPaper(linesQuantity);
-            mPrinter.flush();
+            // mPrinter.flush();
             mCallbackContext.success();
         } catch (Exception e) {
             mCallbackContext.error(this.getErrorByCode(4, e));
@@ -372,7 +372,7 @@ public class DatecsSDKWrapper {
     public void printTaggedText(String text, String charset) {
         try {
             mPrinter.printTaggedText(text, charset);
-            mPrinter.flush();
+            // mPrinter.flush();
             mCallbackContext.success();
         } catch (Exception e) {
             mCallbackContext.error(this.getErrorByCode(5, e));
@@ -421,7 +421,7 @@ public class DatecsSDKWrapper {
     public void printBarcode(int type, String data) {
         try {
             mPrinter.printBarcode(type, data);
-            mPrinter.flush();
+            // mPrinter.flush();
             mCallbackContext.success();
         } catch (Exception e) {
             mCallbackContext.error(this.getErrorByCode(8, e));
@@ -429,7 +429,7 @@ public class DatecsSDKWrapper {
     }
     
     /**
-     * Print a QR Code
+     * Print a QR Code in EPSON mode
      *
      * @param size: 1, 4, 6, 8, 10, 12, 14
      * @param eccLv - 1: L (7%), 2: M (15%), 3: Q (25%), 4: H (30%)
@@ -438,7 +438,7 @@ public class DatecsSDKWrapper {
     public void printQRCode(int size, int eccLvl, String data) {
         try {
             mPrinter.printQRCode(size, eccLvl, data);
-            mPrinter.flush();
+            // mPrinter.flush();
             mCallbackContext.success();
         } catch (Exception e) {
             mCallbackContext.error(this.getErrorByCode(18, e));
@@ -497,7 +497,7 @@ public class DatecsSDKWrapper {
     public void printPage() {
         try {
             mPrinter.printPage();
-            mPrinter.flush();
+            // mPrinter.flush();
             mCallbackContext.success();
         } catch (Exception e) {
             mCallbackContext.error(this.getErrorByCode(17, e));
@@ -536,7 +536,7 @@ public class DatecsSDKWrapper {
             bitmap.recycle();
 
             mPrinter.printImage(argb, width, height, align, true);
-            mPrinter.flush();
+            //mPrinter.flush();
             mCallbackContext.success();
         } catch (Exception e) {
             mCallbackContext.error(this.getErrorByCode(11, e));
