@@ -376,7 +376,7 @@ public class DatecsSDKWrapper {
      * @param footer
      * @param feedLength
      */
-    public void printer.printReceipt(charset, text, img, width, height, align, footer, feedLength) {
+    public void printReceipt(charset, text, img, width, height, align, footer, feedLength) {
         try {
             mPrinter.printTaggedText(text, charset);
             
