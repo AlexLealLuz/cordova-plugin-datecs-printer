@@ -348,7 +348,7 @@ public class DatecsSDKWrapper {
         }
         try {
             mPrinter.feedPaper(linesQuantity);
-            // mPrinter.flush();
+            mPrinter.flush();
             mCallbackContext.success();
         } catch (Exception e) {
             mCallbackContext.error(this.getErrorByCode(4, e));
@@ -363,6 +363,52 @@ public class DatecsSDKWrapper {
     public void printTaggedText(String text) {
         printTaggedText(text, "ISO-8859-1");
     }
+    
+    /**
+     * Print a receipt
+     *
+     * @param charset
+     * @param text
+     * @param img
+     * @param width
+     * @param height
+     * @param align
+     * @param footer
+     * @param feedLength
+     */
+    public void printer.printReceipt(charset, text, img, width, height, align, footer, feedLength) {
+        try {
+            mPrinter.printTaggedText(text, charset);
+            
+            if (img != null) {
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inScaled = false;
+                byte[] decodedByte = Base64.decode(img, 0);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+                final int imgWidth = bitmap.getWidth();
+                final int imgHeight = bitmap.getHeight();
+                final int[] argb = new int[imgWidth * imgHeight];
+    
+                bitmap.getPixels(argb, 0, imgWidth, 0, 0, imgWidth, imgHeight);
+                bitmap.recycle();
+    
+                mPrinter.printImage(argb, width, height, align, true);
+            }
+            
+            if (footer != null) {
+                mPrinter.printTaggedText(footer, charset);
+            }
+            
+            if (feedLength > 0) {
+                mPrinter.feedPaper(feedLength);
+            }
+            
+            mPrinter.flush();
+            mCallbackContext.success();
+        } catch (Exception e) {
+            mCallbackContext.error(this.getErrorByCode(5, e));
+        }
+    }
 
     /**
      * Print text expecting markup formatting tags and a defined charset
@@ -373,7 +419,7 @@ public class DatecsSDKWrapper {
     public void printTaggedText(String text, String charset) {
         try {
             mPrinter.printTaggedText(text, charset);
-            // mPrinter.flush();
+            mPrinter.flush();
             mCallbackContext.success();
         } catch (Exception e) {
             mCallbackContext.error(this.getErrorByCode(5, e));
@@ -422,7 +468,7 @@ public class DatecsSDKWrapper {
     public void printBarcode(int type, String data) {
         try {
             mPrinter.printBarcode(type, data);
-            // mPrinter.flush();
+            mPrinter.flush();
             mCallbackContext.success();
         } catch (Exception e) {
             mCallbackContext.error(this.getErrorByCode(8, e));
@@ -439,7 +485,7 @@ public class DatecsSDKWrapper {
     public void printQRCode(int size, int eccLvl, String data) {
         try {
             mPrinter.printQRCode(size, eccLvl, data);
-            // mPrinter.flush();
+            mPrinter.flush();
             mCallbackContext.success();
         } catch (Exception e) {
             mCallbackContext.error(this.getErrorByCode(18, e));
@@ -507,7 +553,7 @@ public class DatecsSDKWrapper {
     public void printPage() {
         try {
             mPrinter.printPage();
-            // mPrinter.flush();
+            mPrinter.flush();
             mCallbackContext.success();
         } catch (Exception e) {
             mCallbackContext.error(this.getErrorByCode(17, e));
@@ -546,7 +592,7 @@ public class DatecsSDKWrapper {
             bitmap.recycle();
 
             mPrinter.printImage(argb, width, height, align, true);
-            //mPrinter.flush();
+            mPrinter.flush();
             mCallbackContext.success();
         } catch (Exception e) {
             mCallbackContext.error(this.getErrorByCode(11, e));
