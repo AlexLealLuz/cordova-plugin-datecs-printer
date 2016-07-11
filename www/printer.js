@@ -25,6 +25,9 @@ var printer = {
   flush: function(onSuccess, onError) {
     exec(onSuccess, onError, 'DatecsPrinter', 'flush', []);
   },
+  printReceipt: function(charset, text, image, width, height, align, footer, linesFeed, onSuccess, onError) {
+    exec(onSuccess, onError, 'DatecsPrinter', 'printReceipt', [charset, text, image, width, height, align, footer, linesFeed]);
+  },
   feedPaper: function(lines, onSuccess, onError) {
     exec(onSuccess, onError, 'DatecsPrinter', 'feedPaper', [lines]);
   },
