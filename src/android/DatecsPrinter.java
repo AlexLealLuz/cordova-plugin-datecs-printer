@@ -24,6 +24,7 @@ public class DatecsPrinter extends CordovaPlugin {
 				printQRCode,
 				printImage,
 				printLogo,
+				printReceipt,
 				printSelfTest,
 				setPageRegion,
 				selectPageMode,
@@ -72,6 +73,17 @@ public class DatecsPrinter extends CordovaPlugin {
 				String text = args.getString(0);
 				String charset = args.getString(1);
 				printer.printTaggedText(text, charset);
+				break;
+			case printReceipt:
+				String ch = args.getString(0);
+				String t1 = args.getString(1);
+				String img = args.getString(2);
+				int imgWdth = args.getInt(3);
+				int imgHght = args.getInt(4);
+				int imgAlgn = args.getInt(5);
+				String ft = args.getString(6);
+				int fdLen = args.getInt(7);
+				printer.printReceipt(ch, t1, img, imgWdth, imgHght, imgAlgn, ft, fdLen);
 				break;
 			case getStatus:
 				printer.getStatus();
