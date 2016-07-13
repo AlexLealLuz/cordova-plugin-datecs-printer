@@ -1,5 +1,12 @@
 # cordova-plugin-datecs-printer
 
+**Attn: This plugin is a fork of the original plugin with the following changes:**
+- Implemented QR Code printing (can't confirm it's working because I don't have a DateCS Printer), it doesn't work on ESC/POS compatible printers that I've tried (AgpTek, JP Printer MTP-II), I'm still printing QR as images
+- Reusing BT connections: if you didn't close a connection, it will try to reuse the connection if the printer address is the same, otherwise it'll close the connection and create a new one.
+- Implemented single flush(): Each printing method (text, image) flushes its content, this can be a problem when two devices are using the same printer at the same time, you can call a flush() at the end after calling each method, notice that I didn't change original methods yet, they still call flush
+- Implemented printReceipt(): it will print some text that you can define, an image (like QR Code), a footer and feed the paper, only the first text is required, pass null to the others, it will only flush (and print) after the last command (it's faster)
+- Updated DateCS libraries to the latest version
+
 The first thing that you must know is that the plugin is available through this variable `window.DatecsPrinter`.
 
 So, there's a lot of functions that you can call to execute each operation and perform the printer actions, these are the most important ones (you can see all on [printer.js](www/printer.js) file):
