@@ -209,11 +209,12 @@ public class DatecsSDKWrapper {
     protected void connect(String address, CallbackContext callbackContext) {
         mConnectCallbackContext = callbackContext;
         
-        if (mAddress == null || mAddress.length() == 0 || !BluetoothAdapter.checkBluetoothAddress(mAddress) || !address.equals(mAddress)) {
+        if (mAddress == null || mAddress.length() == 0 || !address.equals(mAddress)) {
             mAddress = address;
         } else {
             if (mBluetoothSocket != null && mBluetoothSocket.isConnected()) {
                 callbackContext.success();
+                return;
             }
         }
 
