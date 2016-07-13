@@ -209,7 +209,7 @@ public class DatecsSDKWrapper {
     protected void connect(String address, CallbackContext callbackContext) {
         mConnectCallbackContext = callbackContext;
         
-        if (mAddress == null || mAddress.length == 0 || !BluetoothAdapter.checkBluetoothAddress(mAddress) || !address.equals(mAddress)) {
+        if (mAddress == null || mAddress.length() == 0 || !BluetoothAdapter.checkBluetoothAddress(mAddress) || !address.equals(mAddress)) {
             mAddress = address;
         } else {
             if (mBluetoothSocket != null && mBluetoothSocket.isConnected()) {
@@ -660,7 +660,7 @@ public class DatecsSDKWrapper {
 //            }
 //        });
         if (resetConnection) {
-            connect(mConnectCallbackContext);
+            connect(mAddress, mConnectCallbackContext);
         }
     }
 
