@@ -55,8 +55,7 @@ public class DatecsPrinter extends CordovaPlugin {
 				printer.getBluetoothPairedDevices(callbackContext);
 				break;
 			case connect:
-				printer.setAddress(args.getString(0));
-				printer.connect(callbackContext);
+				printer.connect(args.getString(0), callbackContext);
 				break;
 			case disconnect:
 				try {
