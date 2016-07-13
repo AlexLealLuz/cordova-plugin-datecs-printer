@@ -206,8 +206,17 @@ public class DatecsSDKWrapper {
      *
      * @param callbackContext
      */
-    protected void connect(CallbackContext callbackContext) {
+    protected void connect(String address, CallbackContext callbackContext) {
         mConnectCallbackContext = callbackContext;
+        
+        if (mAddress == null || mAddress.length == 0 || !BluetoothAdapter.checkBluetoothAddress(mAddress) || !address.equals(mAddress)) {
+            mAddress = address;
+        } else {
+            if (mBluetoothSocket != null && mBluetoothSocket.isConnected()) {
+                callbackContext.success();
+            }
+        }
+
         closeActiveConnections();
         if (BluetoothAdapter.checkBluetoothAddress(mAddress)) {
             establishBluetoothConnection(mAddress, callbackContext);
@@ -228,10 +237,12 @@ public class DatecsSDKWrapper {
     private synchronized void closePrinterConnection() {
         if (mPrinter != null) {
             mPrinter.close();
+            mPrinter = null;
         }
 
         if (mProtocolAdapter != null) {
             mProtocolAdapter.close();
+            mProtocolAdapter = null;
         }
     }
 
