@@ -103,6 +103,7 @@ public class DatecsSDKWrapper {
         put(16, "Erro ao imprimir retângulo");
         put(17, "Erro ao imprimir retângulo");
         put(18, "Erro ao imprimir QR code");
+        put(19, "Erro ao conectar na impressora");
     }};
 
     private JSONObject getErrorByCode(int code) {
@@ -290,6 +291,7 @@ public class DatecsSDKWrapper {
                     e.printStackTrace();
                     sendStatusUpdate(false);
                     showError("Falha ao conectar: " + e.getMessage(), false);
+                    callbackContext.error(this.getErrorByCode(19));
                     return;
                 }
 
@@ -301,6 +303,7 @@ public class DatecsSDKWrapper {
                     e.printStackTrace();
                     sendStatusUpdate(false);
                     showError("Falha ao inicializar: " + e.getMessage(), false);
+                    callbackContext.error(this.getErrorByCode(19));
                     return;
                 }
             }
