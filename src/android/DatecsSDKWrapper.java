@@ -43,7 +43,7 @@ import com.datecs.api.printer.Printer.ConnectionListener;
 import com.datecs.api.printer.ProtocolAdapter;
 
 public class DatecsSDKWrapper {
-    private static final String LOG_TAG = "BluetoothPrinter";
+    public static final String LOG_TAG = "BluetoothPrinter";
     private Printer mPrinter;
     private ProtocolAdapter mProtocolAdapter;
     private BluetoothSocket mBluetoothSocket;
@@ -84,7 +84,7 @@ public class DatecsSDKWrapper {
         }
     };
 
-    private Map<Integer, String> errorCode = new HashMap<Integer, String>(){{
+    public static final Map<Integer, String> errorCode = new HashMap<Integer, String>(){{
         put(1, "Adaptador Bluetooth não disponível");
         put(2, "Nenhum dispositivo Bluetooth encontrado");
         put(3, "A quantidade de linhas deve estar entre 0 e 255");
@@ -106,11 +106,11 @@ public class DatecsSDKWrapper {
         put(19, "Erro ao conectar na impressora");
     }};
 
-    private JSONObject getErrorByCode(int code) {
-        return this.getErrorByCode(code, null);
+    public static final JSONObject getErrorByCode(int code) {
+        return DatecsSDKWrapper.getErrorByCode(code, null);
     }
 
-    private JSONObject getErrorByCode(int code, Exception exception) {
+    public static final JSONObject getErrorByCode(int code, Exception exception) {
         JSONObject json = new JSONObject();
         try {
             json.put("errorCode", code);
@@ -120,7 +120,7 @@ public class DatecsSDKWrapper {
             }
         } catch (Exception e) {
             Log.e(LOG_TAG, e.getMessage());
-            showToast(e.getMessage());
+            //showToast(e.getMessage());
         }
         return json;
     }
@@ -291,7 +291,7 @@ public class DatecsSDKWrapper {
                     e.printStackTrace();
                     sendStatusUpdate(false);
                     showError("Falha ao conectar: " + e.getMessage(), false);
-                    callbackContext.error(this.getErrorByCode(19));
+                    callbackContext.error(DatecsSDKWrapper.getErrorByCode(19));
                     return;
                 }
 
@@ -303,7 +303,7 @@ public class DatecsSDKWrapper {
                     e.printStackTrace();
                     sendStatusUpdate(false);
                     showError("Falha ao inicializar: " + e.getMessage(), false);
-                    callbackContext.error(this.getErrorByCode(19));
+                    callbackContext.error(DatecsSDKWrapper.getErrorByCode(19));
                     return;
                 }
             }
