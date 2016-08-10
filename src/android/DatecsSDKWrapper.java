@@ -395,7 +395,7 @@ public class DatecsSDKWrapper {
         try {
             mPrinter.printTaggedText(text, charset);
             
-            if (img != null) {
+            if (img != null && !"null".equals(img)) {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inScaled = false;
                 byte[] decodedByte = Base64.decode(img, 0);
